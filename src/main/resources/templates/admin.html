@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>年会后台控制</title>
+	</head>
+	<body>
+		<p>当日年会人数</p>
+		<div class="">
+			<input type="number" name="totalPnumber" id="totalPnumber" value="" />
+		</div>
+		<div class="">
+			<input type="button" name="" id="btnSetTotalPnumber" value="确定" />
+		</div>
+		<br /><br /><br /><br /><br />
+		<div class="">
+			<input type="button" name="" id="btnStartVote"  value="开始投票"/>
+			<br /><br /><br /><br /><br />
+			<input type="button" name="" id="btnStopVote" value="结束投票" />
+		</div>
+		
+		<br /><br /><br /><br /><br />
+		<div class="">
+			<a href="/draw_third_prize" target="_blank">抽奖页面（三等奖）</a>
+			<a href="/draw_second_prize" target="_blank">抽奖页面（二等奖）</a>
+			<a href="/draw_first_prize" target="_blank">抽奖页面（一等奖）</a>
+			<a href="/draw_grand_prize" target="_blank">抽奖页面（特等奖）</a>
+			<br /><br /><br />
+			<a href="/rvote" target="_blank">投票统计页面</a>
+		</div>
+		<hr/>
+		<p>投票状态：<#if voteState = 1> 
+  					未开始
+				  <#elseif voteState = 2>
+					 投票中
+				  <#else>
+				  	投票结束  
+				  </#if></p>
+		<hr/>
+		
+		<script type="text/javascript" src="/lib/vote/js/jquery-2.1.0.js"></script>
+		<script type="text/javascript">
+			$("#btnStartVote").on("click",function(){
+				var _this = this;
+				$.get("/start_vote",function(){
+					alert('开始投票'); 
+					_this.disabled = 'true'
+				});
+			});
+			
+			$("#btnStopVote").on("click",function(){
+				var _this = this;
+				$.get("/stop_vote",function(){
+					alert('投票结束'); 
+					_this.disabled = 'true'
+				});
+			});
+			
+			$("#btnSetTotalPnumber").on("click",function(){
+				if(confirm("确定设置年会人数（将初始化系统数据）")){
+					var pnumber = $("#totalPnumber").val();
+					$.get("/set_pn",{"pn":pnumber},function(data){
+						if(data.code == 0){
+							alert("人数设置成功");	
+						}else{
+							alert("人数设置失败");
+						}
+					});
+				}
+			});
+			
+		</script>
+	</body>
+</html>

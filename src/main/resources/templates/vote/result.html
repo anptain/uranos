@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+			html,body {
+				position: relative;
+				width: 100%;
+				height: 100%;
+				color: #fff;
+				/*font-family: "microsoft yahei","微软雅黑";*/
+				-webkit-text-size-adjust:none;
+				font-family: '造字工房形黑（非商用）细体';
+			}
+			.dis_none {
+				display: none;
+			}
+			.dis_vis {
+				visibility: hidden;
+			}
+			.main {
+				position: relative;
+				width: 100%;
+				height: 100%;
+				background-image: url(/lib/rvote/images/bg.jpg);
+				background-repeat: no-repeat;
+				background-position: center center;
+			}
+			.main:before {
+				content: "";
+				position: absolute;
+				left: 24px;
+				bottom: 38px;
+				width: 252px;
+				height: 245px;
+				background: url(/lib/rvote/images/jiji.png) no-repeat 0 0;
+			}
+			.Awards_name {
+				position: absolute;
+				left: 48px;
+				top: 66px;
+			}
+			.Awards_player {
+				position: absolute;
+				left: 58%;
+				top: 64px;
+			}
+			.Awards_player span {
+				letter-spacing: 3px;
+			}
+			.Awards_player div:first-child {
+				margin-bottom: 20px;
+				display: flex;
+				justify-content:space-between;
+				align-items:baseline;
+			}
+			.Awards_player div:first-child span:first-child {
+				font-size: 60px;
+				color: #fff;
+			}
+			.Awards_player div:first-child span:last-child{
+				position: relative;
+				padding-right: 7px;
+				font-size: 40px;
+				color: #ffd633;
+			}
+			.Awards_player div:first-child span:last-child:before {
+				content: "】";
+				position: absolute;
+				right: -20px;
+				top: 0;
+			}
+			.Awards_player div:last-child {
+				position: relative;
+				overflow: hidden;
+				box-sizing: border-box;
+				width: 440px;
+				height: 520px;
+				border: 2px solid #fff;
+				background-color: #fff;
+			}
+			.Awards_player div:last-child img {
+				-webkit-filter: blur(40px);
+		        -moz-filter: blur(40px);
+		        -ms-filter: blur(40px);    
+		        filter: blur(40px);
+			}
+			/*模糊动画效果*/
+			.blur {
+				-webkit-animation: fadeIn 6s 1s ease both;
+				-moz-animation: fadeIn 6s 1s ease both;
+			}
+			
+			@-webkit-keyframes fadeIn{
+				0% {
+					opacity: 1;
+					-webkit-filter: blur(40px);
+			        -moz-filter: blur(40px);
+			        -ms-filter: blur(40px);    
+			        filter: blur(40px);
+				}
+				80% {
+					opacity: 1;
+					-webkit-filter: blur(0px);
+			        -moz-filter: blur(0px);
+			        -ms-filter: blur(0px);    
+			        filter: blur(0px);
+				}
+				85% {
+					-webkit-filter: blur(0px);
+			        -moz-filter: blur(0px);
+			        -ms-filter: blur(0px);    
+			        filter: blur(0px);
+					opacity: 0;
+				}
+				90% {
+					-webkit-filter: blur(0px);
+			        -moz-filter: blur(0px);
+			        -ms-filter: blur(0px);    
+			        filter: blur(0px);
+					opacity: 1;
+				}
+				95% {
+					-webkit-filter: blur(0px);
+			        -moz-filter: blur(0px);
+			        -ms-filter: blur(0px);    
+			        filter: blur(0px);
+					opacity: 0;
+				}
+				100% {
+					-webkit-filter: blur(0px);
+			        -moz-filter: blur(0px);
+			        -ms-filter: blur(0px);    
+			        filter: blur(0px);
+					opacity: 1;
+				}
+			}
+			
+			@keyframes fadeIn{
+				0% {
+					opacity: 1;
+					-webkit-filter: blur(40px);
+			        -moz-filter: blur(40px);
+			        -ms-filter: blur(40px);    
+			        filter: blur(40px);
+				}
+				80% {
+					opacity: 1;
+					-webkit-filter: blur(0px);
+			        -moz-filter: blur(0px);
+			        -ms-filter: blur(0px);    
+			        filter: blur(0px);
+				}
+				85% {
+					-webkit-filter: blur(0px);
+			        -moz-filter: blur(0px);
+			        -ms-filter: blur(0px);    
+			        filter: blur(0px);
+					opacity: 0;
+				}
+				90% {
+					-webkit-filter: blur(0px);
+			        -moz-filter: blur(0px);
+			        -ms-filter: blur(0px);    
+			        filter: blur(0px);
+					opacity: 1;
+				}
+				95% {
+					-webkit-filter: blur(0px);
+			        -moz-filter: blur(0px);
+			        -ms-filter: blur(0px);    
+			        filter: blur(0px);
+					opacity: 0;
+				}
+				100% {
+					-webkit-filter: blur(0px);
+			        -moz-filter: blur(0px);
+			        -ms-filter: blur(0px);    
+			        filter: blur(0px);
+					opacity: 1;
+				}
+			}
+			/*旋转动画效果*/
+			.rotate {
+				-webkit-animation: rotateIn 1.5s .2s ease both;
+				-moz-animation: rotateIn 1.5s .2s ease both;
+			}
+			
+			@-webkit-keyframes rotateIn {
+				0% {
+					-webkit-transform-origin: center center;
+					-webkit-transform: rotate(-360deg);
+					opacity: 0
+				}
+				100% {
+					-webkit-transform-origin: center center;
+					-webkit-transform: rotate(0);
+					opacity: 1
+				}
+			}
+			
+			@-moz-keyframes rotateIn {
+				0% {
+					-moz-transform-origin: center center;
+					-moz-transform: rotate(-360deg);
+					opacity: 0
+				}
+				100% {
+					-moz-transform-origin: center center;
+					-moz-transform: rotate(0);
+					opacity: 1
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="main">
+			<div class="Awards_name dis_none">
+				<img src="/lib/rvote/images/award1.png"/>
+			</div>
+			<div class="Awards_player">
+				<div class="">
+					<span class="dis_vis">王娇</span>
+					<span class="dis_vis">【感恩的心</span>
+				</div>
+				<div class="Awards_img">
+					<img src="/lib/rvote/images/player1.jpg" width="440" height="520" class=""/>
+				</div>
+			</div>
+		</div>
+		
+		<script src="/lib/rvote/js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var winners = ${winners};
+			$(function(){
+				var m = 0;/*控制次数*/
+				$(document).keydown(function(e){
+				    if(!e) var e = window.event; 
+				    /*按键盘的z键开始*/
+				    if(e.keyCode==90){
+				    	if(m<5){
+				    		m++;
+				    		showText();
+				    	}
+					};
+					/*r键显示结果，获奖选手*/
+					if(e.keyCode==82){
+						/*显示获奖选手名字*/
+						showName();
+					}
+				});
+				/*显示获奖选手名字，歌曲*/
+				function showName(){
+					$(".Awards_player span:eq(0)").html(winners[m-1].name);
+					$(".Awards_player span:eq(1)").html("【"+winners[m-1].songName);
+					$(".Awards_name").attr("class","Awards_name");
+					$(".Awards_img img").attr({"src":"/repo?number="+winners[m-1].number+"_s","class":"blur"});
+					setTimeout(function(){
+						$(".Awards_player span").removeClass("dis_vis");
+					},5000);
+				};
+				/*显示奖项*/
+				function showText(){
+					$(".Awards_player span").attr("class","dis_vis");
+					$(".Awards_img img").attr("class","");
+					$(".Awards_name img").attr("src","/lib/rvote/images/award"+m+".png");
+					$(".Awards_name").attr("class","Awards_name rotate");
+				}
+				
+			});
+		</script>
+	</body>
+</html>

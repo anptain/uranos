@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<style type="text/css">
+			*{
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+			html {
+				height: 100%;
+			}
+			body {
+				position: relative;
+				margin: 0 auto;
+				width: 7.5rem;
+				height: 100%;
+				font-family: "microsoft yahei","Helvetica Neue", Helvetica, sans-serif;
+			}
+			.main {
+				padding: 5.3rem 0 1rem 0;
+				background: url(/lib/vote/images/bg@2x.jpg) no-repeat center 0;
+				background-size: 100%;
+			}
+			.header {
+				display: flex;
+				display: -webkit-flex;
+				flex-direction: column;
+				-webkit-flex-direction: column;
+				justify-content: center;
+				-webkit-justify-content: center;
+				text-align: center;
+				height: 2.14rem;
+				background-repeat: no-repeat;
+				background-position: 0 center;
+			}
+			.header h3 {
+				font-weight: normal;
+				font-size: .6rem;
+				color: #fff;
+			}
+			.header p {
+				font-size: .36rem;
+				color: #ffd633;
+			}
+			.choose {
+				padding: 0 .31rem .84rem .31rem;
+			}
+			.main .choose:first-child {
+				background: url(/lib/vote/images/1@2x.png) no-repeat .3rem .2rem;
+				background-size: .9rem 2rem;
+			}
+			.count {
+				z-index: 100;
+				padding-top: .18rem;
+				box-sizing: border-box;
+				position: fixed;
+				right: 0;
+				top: 50%;
+				width: 1rem;
+				height: 1rem;
+				font-size: .2rem;
+				text-align: center;
+				border-radius: 3px 0 0 3px;
+				background-color: #ffd633;
+			}
+			.count small {
+				color: #725b22;
+			}
+			.btn {
+				z-index: 99;
+				position: fixed;
+				left: 0;
+				bottom: 0;
+				width: 100%;
+				height: 1rem;
+				line-height: 1rem;
+				text-align: center;
+				font-size: .36rem;
+				text-decoration: none;
+				color: #d1a73e;
+				background-color: #ffd633;
+			}
+			.btn_ok {
+				color: #000;
+			}
+			.btn_ok:active {
+				background-color: #ffbb33;
+			}
+			.choose ul {
+				display: flex;
+				display: -webkit-flex;
+				flex-flow: row wrap;
+				-webkit-flex-flow: row wrap;
+				-webkit-justify-content: space-between;
+				justify-content: space-between;
+			}
+			.choose li {
+				position: relative;
+				box-sizing: border-box;
+				margin-bottom: .24rem;
+				width: 3.3rem;
+				height: 3.2rem;
+				border: 5px solid #fff;
+				background: url(/lib/vote/images/circle@2x.png) no-repeat 2.62rem 2.60rem #fff;
+				background-size: .4rem .4rem;
+			}
+			.choose li.current {
+				border-color: #ffd633;
+				background:url(/lib/vote/images/circle1@2x.png) no-repeat 2.62rem 2.60rem #ffd633;
+				background-size: .4rem .4rem;
+			}
+			.choose li.mask {
+				background: #fff;
+			}
+			.choose li.mask:before {
+				z-index: 99;
+				content: "";
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(255,255,255,0.6);
+			}
+			.choose li>input {
+				opacity: 0;
+				z-index: 5;
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+			}
+			.player_img {
+				position: relative;
+				height: 2.4rem;
+			}
+			.player_img>img {
+				width: 100%;
+				height: 100%;
+			}
+			.player_img>span {
+				position: absolute;
+				left: 0;
+				bottom: 0;
+				padding-left: .18rem;
+				width: 100%;
+				height: .6rem;
+				line-height: .6rem;
+				box-sizing: border-box;
+				font-size: .26rem;
+				color: #fff;
+				background: -webkit-linear-gradient(transparent, rgba(0,0,0,0.5)); /* Safari 5.1 - 6.0 */
+			    background: -o-linear-gradient(transparent, rgba(0,0,0,0.5)); /* Opera 11.1 - 12.0 */
+			    background: -moz-linear-gradient(transparent, rgba(0,0,0,0.5)); /* Firefox 3.6 - 15 */
+			    background: linear-gradient(transparent, rgba(0,0,0,0.5)); /* 标准的语法 */
+			}
+			.music_name {
+				padding-top: .20rem;
+				padding-left: .5rem;
+				box-sizing: border-box;
+				height: .7rem;
+				font-size: .3rem;
+				color: #000;
+				background: url(/lib/vote/images/music_icon@2x.png) no-repeat .12rem .26rem;
+				background-size: .28rem .29rem;
+			}
+			
+			@media screen and (max-width: 320px) {
+				.choose li {
+					background: url(/lib/vote/images/circle@2x.png) no-repeat 2.62rem 2.60rem #fff;
+					background-size: .36rem .36rem;
+				}
+				.choose li.current {
+					background:url(/lib/vote/images/circle1@2x.png) no-repeat 2.62rem 2.60rem #ffd633;
+					background-size: .36rem .36rem;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="main">
+			<!--实力非凡奖-->
+			<div class="choose" style="background-color: #b70005;">
+				<div class="header">
+					<h3>实力非凡奖</h3>
+					<p>唱功折服众人</p>
+				</div>
+				<ul>
+					<#list campaigner as item >
+						<li>
+							<input type="checkbox" name="${item.number}" value="${item.number}" app-prop-name="p1"/>
+							<div class="player_img">
+								<span>${item.name}</span>
+								<img src="/repo?number=${item.number}"/>
+							</div>
+							<div class="music_name">
+								${item.songName}
+							</div>
+						</li>
+					</#list>
+				</ul>
+			</div>
+			<!--亮瞎眼球-->
+			<div class="choose" style="background: #ed5209 url(/lib/vote/images/2@2x.png) no-repeat 0 0/1.54rem 2.02rem;">
+				<div class="header">
+					<h3>亮瞎眼球奖</h3>
+					<p>造型全场瞩目</p>
+				</div>
+				<ul>
+					<#list campaigner as item >
+						<li>
+							<input type="checkbox" name="${item.number}" value="${item.number}" app-prop-name="p2"/>
+							<div class="player_img">
+								<span>${item.name}</span>
+								<img src="/repo?number=${item.number}"/>
+							</div>
+							<div class="music_name">
+								${item.songName}
+							</div>
+						</li>
+					</#list>
+				</ul>
+			</div>
+			<!--老司机奖-->
+			<div class="choose" style="background: #8600e6 url(/lib/vote/images/3@2x.png) no-repeat 0 0/1.5rem 2.04rem;">
+				<div class="header">
+					<h3>老司机带带我奖</h3>
+					<p>台风成熟  尽在掌握</p>
+				</div>
+				<ul>
+					<#list campaigner as item >
+						<li>
+							<input type="checkbox" name="${item.number}" value="${item.number}" app-prop-name="p3"/>
+							<div class="player_img">
+								<span>${item.name}</span>
+								<img src="/repo?number=${item.number}"/>
+							</div>
+							<div class="music_name">
+								${item.songName}
+							</div>
+						</li>
+					</#list>
+				</ul>
+			</div>
+			<!--满满套路-->
+			<div class="choose" style="background: #d91600 url(/lib/vote/images/4@2x.png) no-repeat 0 0/1.39rem 2rem;">
+				<div class="header">
+					<h3>满满套路奖</h3>
+					<p>创意满格  独具匠心</p>
+				</div>
+				<ul>
+					<#list campaigner as item >
+						<li>
+							<input type="checkbox" name="${item.number}" value="${item.number}" app-prop-name="p4"/>
+							<div class="player_img">
+								<span>${item.name}</span>
+								<img src="/repo?number=${item.number}"/>
+							</div>
+							<div class="music_name">
+								${item.songName}
+							</div>
+						</li>
+					</#list>
+				</ul>
+			</div>
+			<!--我的歌奖-->
+			<div class="choose" style="background: #c61884 url(/lib/vote/images/5@2x.png) no-repeat 0 0/1.56rem 2.02rem;">
+				<div class="header">
+					<h3>厉害了，我的歌奖</h3>
+					<p>最佳曲目选择</p>
+				</div>
+				<ul>
+					<#list campaigner as item >
+						<li>
+							<input type="checkbox" name="${item.number}" value="${item.number}" app-prop-name="p5"/>
+							<div class="player_img">
+								<span>${item.name}</span>
+								<img src="/repo?number=${item.number}"/>
+							</div>
+							<div class="music_name">
+								${item.songName}
+							</div>
+						</li>
+					</#list>
+				</ul>
+			</div>
+			<!--计数-->
+			<div class="count">
+				<span>已选择</span><br />
+				<span style="font-size: .36rem;">0</span><small>/5</small>
+			</div>
+			<!--按钮-->
+			<a href="#" class="btn">投票（需选满5个奖项）</a>
+		</div>
+		<script src="/lib/vote/js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			/*rem单位设置*/
+			var deviceWidth = document.documentElement.clientWidth;
+			if(deviceWidth > 750) deviceWidth = 750;
+			document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+			
+			$(function(){
+				var inputIndex;
+				$("input[type='checkbox']").click(function(){
+					inputIndex = $(this).parent().index();
+					var thisName = $(this).attr("name");
+					
+					
+					
+					if($(this).parent().parent().find(".current").length=="0" && !$(this).parent().hasClass("current")){
+						$(this).parent().addClass("current");
+						$("input[name='"+thisName+"']:not(:checked)").parent().addClass("mask");
+					}else if($(this).parent().hasClass("current")){
+						$(this).parent().removeClass("current");
+						$("input[name='"+thisName+"']").parent().removeClass("mask");
+					}else{
+						$(this).parent().siblings().find("input").removeAttr("checked");
+						var checkedName = $(this).parent().parent().children(".current").find("input").attr("name");
+						$(this).parent().parent().children(".current").removeClass("current");
+						$(this).parent().addClass("current");
+						$("input[name='"+thisName+"']:not(:checked)").parent().addClass("mask");
+						$("input[name='"+checkedName+"']").parent().removeClass("mask");
+					};
+					
+					
+					$(".count small").prev().html($("input:checked").length);
+					if($("input:checked").length=="5"){
+						$(".btn").addClass("btn_ok").html("投票");
+					}else{
+						$(".btn").removeClass("btn_ok").html("投票（需选满5个奖项）");
+					}
+				});
+				
+				$(".main").on("click",".btn_ok",function(){
+					var p1 = $("input[app-prop-name=p1]:checked").val();
+					var p2 = $("input[app-prop-name=p2]:checked").val();
+					var p3 = $("input[app-prop-name=p3]:checked").val();
+					var p4 = $("input[app-prop-name=p4]:checked").val();
+					var p5 = $("input[app-prop-name=p5]:checked").val();
+					var param = {"p1":p1,"p2":p2,"p3":p3,"p4":p4,"p5":p5,"code":"${code!}"};
+					$.get("/vote",param,function(data){
+						if(data.code == 0){
+							location.href = "/?code=${code!}";
+						}else{
+							alert("投票失败，请稍后重试");
+						}
+					});
+					
+				});
+			});
+		</script>
+	</body>
+</html>
